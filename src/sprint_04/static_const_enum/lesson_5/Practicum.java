@@ -2,6 +2,8 @@ package sprint_04.static_const_enum.lesson_5;
 
 // импортируйте нужные пакеты
 
+import java.util.ArrayList;
+
 public class Practicum {
 
     public static void main(String[] args) {
@@ -14,6 +16,10 @@ public class Practicum {
         tasks.add(new Task(TaskPriority.LOW, "Купить пылесос."));
 
         System.out.println("Задачи с наивысшим приоритетом на сегодня:");
-        ... // цикл for для поиска задач
+        for (Task task : tasks){
+            if (task.getPriority() == TaskPriority.HIGH){
+                System.out.println(task.getDescription());
+            }
+        }
     }
 }
