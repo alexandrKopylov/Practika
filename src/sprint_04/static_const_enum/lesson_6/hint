@@ -1,0 +1,5 @@
+Ссылку на карту нужно хранить как константу public static final String MAP_LINK = "https://recyclemap.ru/".
+Чтобы перевести введённую команду в тип ChatCommand, используйте метод ChatCommand.valueOf(commandValue).
+Для описания действий команды используйте оператор switch.
+Метод isRecycled должен быть static, чтобы его можно было вызвать из другого статического метода.
+Все переменные в классе RecyclableMaterial — финальные и приватные.
