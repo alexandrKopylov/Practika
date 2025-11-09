@@ -2,9 +2,9 @@ package sprint_04.static_const_enum.lesson_3;
 
 public class Cake {
 
-    private String name;
+   final private String name;
     private double weightInGrams;
-    private double pricePerKg;
+   final private double pricePerKg;
 
     public Cake(String name, double weightInGrams, double pricePerKg) {
         this.name = name;
