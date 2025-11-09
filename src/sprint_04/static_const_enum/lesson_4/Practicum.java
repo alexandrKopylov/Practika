@@ -9,10 +9,9 @@ public class Practicum {
 
         System.out.println("Пожалуйста, введите сумму перевода в рублях.");
         // считайте сумму перевода при помощи scanner.nextDouble()
-
-        boolean isValid = ... // добавьте вызов метод isValidAmount
+        double amount = scanner.nextDouble();
+        boolean isValid = TransactionValidator.isValidAmount(amount); // добавьте вызов метод isValidAmount
         if (isValid)
             System.out.println("Спасибо! Ваш перевод на сумму " + amount + " р. успешно выполнен.");
     }
-}
 }
