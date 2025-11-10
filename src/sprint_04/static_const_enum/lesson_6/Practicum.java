@@ -10,6 +10,7 @@ public class Practicum {
 
     public static final String MAP_LINK = "https://recyclemap.ru/";
 
+
     public static final ArrayList<RecyclableMaterial> materials = getMaterials();
     public static final HashMap<MaterialType, String> containers = getContainers();
 
