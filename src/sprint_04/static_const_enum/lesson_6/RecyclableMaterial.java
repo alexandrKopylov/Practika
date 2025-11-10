@@ -3,6 +3,10 @@ package sprint_04.static_const_enum.lesson_6;
 public class RecyclableMaterial {
 
     // объявите переменные с правильными модификаторами
+    private final int code;
+    private final MaterialType type;
+    private final boolean isRecyclable;
+    private final String description;
 
     RecyclableMaterial(int code, MaterialType type, boolean isRecyclable, String description) {
         this.code = code;

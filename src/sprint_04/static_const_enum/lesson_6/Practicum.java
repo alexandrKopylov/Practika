@@ -6,7 +6,10 @@ import java.util.Scanner;
 
 public class Practicum {
     // объявите поле для ссылки на карту (англ. map link)
-    ... = "https://recyclemap.ru/";
+   // ... = "https://recyclemap.ru/";
+
+    public static final String MAP_LINK = "https://recyclemap.ru/";
+
     public static final ArrayList<RecyclableMaterial> materials = getMaterials();
     public static final HashMap<MaterialType, String> containers = getContainers();
 
@@ -15,6 +18,11 @@ public class Practicum {
         printMenu();
 
         String commandValue = scanner.nextLine();
+
+
+
+
+
         /* в зависимости от команды выполните следующие действия:
            map - вывести на экран ссылку на карту;
            recyclability - 1. напечатать сообщение "Введите код переработки:",
@@ -30,7 +38,7 @@ public class Practicum {
     }
 
     // добавьте модификаторы в заголовок метода
-    ...  void isRecycled(int code) {
+    public static  void isRecycled(int code) {
         for (RecyclableMaterial material : materials) {
             if (material.getCode() == code) {
                 System.out.print("Это " + material.getDescription() + ". ");
@@ -46,7 +54,7 @@ public class Practicum {
     }
 
     // добавьте модификаторы в заголовок метода
-    ... HashMap<MaterialType, String> getContainers() {
+    public static HashMap<MaterialType, String> getContainers() {
         HashMap<MaterialType, String> containers = new HashMap<>();
         containers.put(MaterialType.PLASTIC, "Пластик");
         containers.put(MaterialType.METAL, "Металл");
