@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Practicum {
     // объявите поле для ссылки на карту (англ. map link)
-   // ... = "https://recyclemap.ru/";
+    // ... = "https://recyclemap.ru/";
 
     public static final String MAP_LINK = "https://recyclemap.ru/";
 
@@ -20,7 +20,32 @@ public class Practicum {
 
         String commandValue = scanner.nextLine();
 
+        ChatCommand command = ChatCommand.valueOf(commandValue);
+        switch (command) {
+            case MAP: // Действия для команды MAP
+                System.out.println(MAP_LINK);
+                break;
+            case RECYCLABILITY: // Действия для команды RECYCLABILITY
+                System.out.println("Введите код переработки:");
+                int code = scanner.nextInt();
+                isRecycled(code);
+                break;
+            case BONUS: // Действия для команды BONUS
 
+                System.out.println("Введите количество вторсырья, кг:");
+                int weight = scanner.nextInt();
+                int bonus;
+                if (weight < 10) {
+                    bonus = weight * 10;
+                } else {
+                    bonus = weight * 15;
+                }
+                System.out.println("Количество бонусных баллов: " + bonus + ".");
+                break;
+
+            default:
+                System.out.println("Такой команды нет.");
+        }
 
 
 
@@ -39,7 +64,7 @@ public class Practicum {
     }
 
     // добавьте модификаторы в заголовок метода
-    public static  void isRecycled(int code) {
+    public static void isRecycled(int code) {
         for (RecyclableMaterial material : materials) {
             if (material.getCode() == code) {
                 System.out.print("Это " + material.getDescription() + ". ");
