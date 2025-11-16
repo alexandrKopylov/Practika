@@ -1,4 +1,4 @@
-package sprint_05.oop_abstraction_and_polymorphizm.lesson_1_abstract_class;
+package sprint_05.oop_abstraction_and_polymorphizm.lesson_1_abstract_class.task_1;
 
 // Имплементируйте абстрактный класс Duck,
 // который будет содержать общие свойства и методы классов FlyingDuck и RubberDuck
