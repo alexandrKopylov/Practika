@@ -3,7 +3,7 @@ package sprint_05.oop_abstraction_and_polymorphizm.lesson_1_abstract_class.task_
 public class Spider extends Pet{
     public Spider() {
         super("ggg");
-        this.setPawsCount(8);
+        super.setPawsCount(8);
     }
 
 }

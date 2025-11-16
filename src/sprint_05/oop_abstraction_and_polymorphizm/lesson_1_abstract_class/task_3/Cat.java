@@ -6,6 +6,8 @@ public class Cat extends Pet{
     public Cat() {
         super("mya");
        this.setPawsCount(4);
+
+
     }
 
     public void catchMouse(){
