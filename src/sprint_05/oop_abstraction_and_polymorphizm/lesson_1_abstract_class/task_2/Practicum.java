@@ -4,6 +4,9 @@ abstract class PaymentProcessor {
     public final void processPayment() {
         System.out.println("Начинаю обрабатывать транзакцию.");
         // Добавьте вызовы соответствующих методов
+        verifyDetails();
+        makePayment();
+        sendNotification();
     }
 
     protected abstract void makePayment();
@@ -26,6 +29,10 @@ class MirCardPayment extends PaymentProcessor {
 
 class SbpPayment extends PaymentProcessor {
     // Реализуйте абстрактный метод родительского класса
+    @Override
+    protected void makePayment() {
+        System.out.println("Оплата через Сервис Быстрых Платежей.");
+    }
 }
 
 public class Practicum {
@@ -35,6 +42,10 @@ public class Practicum {
 
         // Вызовите методы обработки транзакции
         // для оплаты сначала по СБП, а затем по карте Мир
+        sbp.processPayment();
+        mir.processPayment();
 
+        //итог :  здесь рнализован патерн "шаблонный метод"
+        //processPayment()  является шаблоном
     }
 }
