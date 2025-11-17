@@ -1,6 +1,6 @@
 package sprint_05.oop_abstraction_and_polymorphizm.lesson_3_interface.task2;
 
-public class Circle {
+public class Circle implements Figure {
     // Радиус круга
     private final double r;
 
@@ -8,6 +8,7 @@ public class Circle {
         this.r = r;
     }
 
+    @Override
     public double getArea() {
         return Math.PI * r * r;
     }
