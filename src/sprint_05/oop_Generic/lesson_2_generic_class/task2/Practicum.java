@@ -1,25 +1,25 @@
 package sprint_05.oop_Generic.lesson_2_generic_class.task2;
 
-class MapEntry ... {
-private final ... key;
-private ... value;
+class MapEntry<K, V> {
+    private final K key;
+    private V value;
 
-public MapEntry(...) {
-    this.key = key;
-    this.value = value;
-}
+    public MapEntry(K key, V value) {
+        this.key = key;
+        this.value = value;
+    }
 
-public ... getKey() {
-        ...
-}
+    public K getKey() {
+        return key;
+    }
 
-public ... getValue() {
-        ...
-}
+    public V getValue() {
+        return value;
+    }
 
-public void setValue(... newValue) {
-        ...
-}
+    public void setValue(V newValue) {
+        this.value = newValue;
+    }
 }
 
 public class Practicum {
