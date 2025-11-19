@@ -6,7 +6,7 @@ import java.util.HashMap;
 public class Practicum {
     public static void main(String[] args) {
         //создаём двухуровневую хеш-таблицу для хранения расписания уроков
-        ... timetable = new AdvancedHashMap<>();
+        AdvancedHashMap<String, Integer, String> timetable = new AdvancedHashMap<>();
         //добавляем уроки, с указанием дня недели и номера урока
         timetable.put("Понедельник", 1, "Русский язык");
         timetable.put("Понедельник", 2, "Математика");
@@ -23,37 +23,37 @@ public class Practicum {
 
 }
 
-class AdvancedHashMap ... {
-        //данные будем хранить в хеш-таблице из хеш-таблиц
-        ... internalHashMap = new HashMap<>();
+class AdvancedHashMap<K, K1, V> {
+    //данные будем хранить в хеш-таблице из хеш-таблиц
+    HashMap<K, HashMap<K1, V>> internalHashMap = new HashMap<>();
 
-public void put(...) {
-    //получаем хеш-таблицу по первому ключу
-        ... innerHashMap = ...;
-    if (innerHashMap == null) {
-        //вложенной хеш-таблицы по первому ключу пока нет — создаём её и добавляем в internalHashMap
-        innerHashMap = new HashMap<>();
-            ...
-    }
-    //добавляем элемент во вложенную хеш-таблицу
-        ...
-}
 
-public ... get(...) {
-    //получаем хеш-таблицу по первому ключу
-        ... innerHashMap = ...;
-    if (innerHashMap == null) {
-        return null;
+    public void put(K key, K1 key1, V value) {
+        HashMap<K1, V> innerHashMap = internalHashMap.get(key);
+        if (innerHashMap == null) {
+            innerHashMap = new HashMap<>();
+        }
+        innerHashMap.put(key1, value);
+        internalHashMap.put(key, innerHashMap);
     }
-    //получаем элемент из вложенной хеш-таблицы
-    return ...;
-}
 
-public ... getAll(...) {
-        ... innerHashMap = ...;
-    if (innerHashMap == null) {
-        return new ArrayList<>();
+
+
+    public  V get(K key, K1 key1) {
+        //получаем хеш-таблицу по первому ключу
+        HashMap<K1, V> innerHashMap = internalHashMap.get(key);
+        if (innerHashMap == null) {
+            return null;
+        }
+        //получаем элемент из вложенной хеш-таблицы
+        return innerHashMap.get(key1);
     }
-    return new ArrayList<>(innerHashMap.values());
-}
+
+    public  ArrayList<V> getAll(K key) {
+        HashMap<K1, V> innerHashMap = internalHashMap.get(key);
+        if (innerHashMap == null) {
+            return new ArrayList<>();
+        }
+        return new ArrayList<>(innerHashMap.values());
+    }
 }
