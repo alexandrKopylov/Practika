@@ -17,11 +17,11 @@ class MyUtils {
     }
 
     // Реализуйте здесь метод countMatches
-    public static ... ... countMatches(... list, ... sample) {
+    public static <T> int countMatches(ArrayList<T> list, T sample) {
         int count = 0;
-        for (... element : list) {
-            if (...) {
-                ... ;
+        for (T element : list) {
+            if (element.equals(sample)) {
+                count++ ;
             }
         }
         return count;
