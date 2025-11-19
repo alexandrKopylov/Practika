@@ -2,20 +2,20 @@ package sprint_05.oop_Generic.lesson_2_generic_class.task3;
 
 import java.util.ArrayList;
 
-class ... {
-private ... items = new ArrayList<>();
+class Bag<T> {
+    private ArrayList<T> items = new ArrayList<>();
 
-public void add(... item) {
-        ...
-}
+    public void add(T item) {
+        items.add(item);
+    }
 
-public ... getAll() {
-    return items;
-}
+    public ArrayList<T> getAll() {
+        return items;
+    }
 
-public int size() {
-        ...
-}
+    public int size() {
+        return items.size();
+    }
 }
 
 public class Practicum {
