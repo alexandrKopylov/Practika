@@ -1,13 +1,13 @@
 package sprint_05.oop_Generic.lesson_2_generic_class.task1;
 
-class Box... {
-private final ... item;
+class Box <T> {
+private final T item;
 
-public Box(... item) {
+public Box(T item) {
     this.item = item;
 }
 
-public ... getItem() {
+public T getItem() {
     return item;
 }
 }
