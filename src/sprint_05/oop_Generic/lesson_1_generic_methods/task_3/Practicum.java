@@ -1,4 +1,4 @@
-package sprint_05.oop_Generic.lesson_1.task_3;
+package sprint_05.oop_Generic.lesson_1_generic_methods.task_3;
 
 import java.util.*;
 
