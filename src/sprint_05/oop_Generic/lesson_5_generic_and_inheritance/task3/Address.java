@@ -1,34 +1,34 @@
 package sprint_05.oop_Generic.lesson_5_generic_and_inheritance.task3;
 
 // унаследуйте класс от базового класса, описывающего контакт Contact
-class Address ... {
-private final String city;
-private final String address;
+class Address extends Contact {
+    private final String city;
+    private final String address;
 
-public Address(String name, String city, String address) {
-        ...
+    public Address(String name, String city, String address) {
+        super(name);
         this.city = city;
         this.address = address;
-        }
+    }
 
-public String getCity() {
+    public String getCity() {
         return city;
-        }
+    }
 
-public String getAddress() {
+    public String getAddress() {
         return address;
-        }
+    }
 
-        // метод sendMessage переопределяет метод базового класса
-        ...
-public void sendMessage() {
+    // метод sendMessage переопределяет метод базового класса
+    @Override
+    public void sendMessage() {
         System.out.println("Отправим открытку в город " + city + " по адресу: " + address);
-        }
+    }
 
-        ...
-public void print() {
+    @Override
+    public void print() {
         System.out.println("Город: " + getCity());
         System.out.println("Адрес: " + getAddress());
-        }
+    }
 
-        }
+}

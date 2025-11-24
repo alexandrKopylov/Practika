@@ -1,14 +1,18 @@
 package sprint_05.oop_Generic.lesson_5_generic_and_inheritance.task3;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Practicum {
 
     // дополните объявление поля friendsContactBook, которое будет хранить в себе список номеров телефонов друзей
-    private static ContactBook... friendsContactBook = ...
+    private static ContactBook<Phone> friendsContactBook = new ContactBook<>();
             // напишите объявления полей colleaguesContactBook, classmatesContactBook и relativesContactBook,
             // которые будут хранить списки электронных адресов, соцсетей и почтовых адресов соответственно
-            ...
+            private static ContactBook<Email> colleaguesContactBook = new ContactBook<>();
+    private static ContactBook<SocialNetworkContact> classmatesContactBook = new ContactBook<>();
+    private static ContactBook<Address> relativesContactBook = new ContactBook<>();
+
 
 
     public static void main(String[] args) {
