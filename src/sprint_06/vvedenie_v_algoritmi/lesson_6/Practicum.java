@@ -32,6 +32,9 @@ public class Practicum {
 
             // Если правый индекс больше максимального — добавляем элемент из левого подмассива.
             else if (right >= rightSize) {
+                resultArray[index] = leftArray[left];
+                left++;
+
                 // !!! Добавьте ваш код
             }
 
@@ -43,7 +46,10 @@ public class Practicum {
             }
             // Иначе — делаем тоже самое с правым индексом.
             else {
-                // !!! Добавьте ваш код
+                resultArray[index] = rightArray[right];
+                right++;
+
+
             }
             index++;
         }
