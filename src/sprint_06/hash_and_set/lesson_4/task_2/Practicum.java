@@ -2,11 +2,12 @@ package sprint_06.hash_and_set.lesson_4.task_2;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Practicum {
     public static void main(String[] args) {
         // ключ – автомобиль, значение – количество экземпляров
-        Map<Car, Integer> cars = new HashMap<>();
+        Map<Car, Integer> cars = new TreeMap<>();
 
         // хеш-таблица заполняется данными
         cars.put(new Car("Audi A6", 3760000), 2);
@@ -21,7 +22,7 @@ public class Practicum {
     }
 }
 
-class Car {
+class Car implements Comparable<Car>{
     String model;
     Integer priceInRubles;
 
@@ -45,5 +46,10 @@ class Car {
 
     public String toString() {
         return "Car{model=" + model + ", priceInRubles=" + priceInRubles + "}";
+    }
+
+    @Override
+    public int compareTo(Car o) {
+        return this.priceInRubles - o.priceInRubles;
     }
 }

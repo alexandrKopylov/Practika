@@ -1,0 +1,6 @@
+Создайте новый объект LinkedHashMap actorsMap. В нём будут храниться имена актёров и количество фильмов.
+Импортируйте пакет LinkedHashMap и пакет Map
+Заполните actorsMap данными на основе actorsList:
+
+actorsMap.put(actor, actorsMap.getOrDefault(actor, 0) + 1)
+Используйте entry.getKey() и entry.getValue(), чтобы вывести данные из хеш-таблицы на консоль.
