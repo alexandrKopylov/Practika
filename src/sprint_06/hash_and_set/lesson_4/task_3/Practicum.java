@@ -1,18 +1,24 @@
 package sprint_06.hash_and_set.lesson_4.task_3;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Practicum {
     public static void main(String[] args) {
         List<String> actorsList = new ArrayList<>();
         fillActors(actorsList);
 
-        ...// заполните хэш-таблицу
+        Map<String,Integer> actorsMap = new LinkedHashMap<>();// заполните хэш-таблицу
+for (String actor : actorsList){
+    actorsMap.put(actor, actorsMap.getOrDefault(actor, 0) + 1);
+}
 
-        for (...) {
-            String actor = ...
-            int filmsCount = ...
+//        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+//            sum += entry.getValue();
+//        }
+
+        for (Map.Entry<String, Integer> entry :  actorsMap.entrySet()) {
+            String actor = entry.getKey();
+            int filmsCount = entry.getValue();
             System.out.println(actor + " снялся в " + filmsCount + " фильмах");
         }
     }
