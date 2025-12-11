@@ -25,6 +25,19 @@ public class PotatoLaboratory {
     private static List<Potato> findPotatoesForExperiment(List<Potato> potatoes) {
 				/* Вычислите две самые большие и две самые маленькие картофелины,
            а затем выведите их в порядке от самых маленьких до самых больших.*/
-        return null;
+
+        List<Potato> resultList = new ArrayList<>(potatoes);
+List<Potato> list =new ArrayList<>();
+       // System.out.println(potatoes);
+        //Collections.sort(potatoes);
+        Collections.sort(resultList);
+       // System.out.println(resultList);
+//System.out.println("min = " + Collections.min(resultList));
+
+        list.add(resultList.get(0));
+        list.add(resultList.get(1));
+        list.add(resultList.get(resultList.size()-2));
+        list.add(resultList.get(resultList.size()-1));
+        return list;
     }
 }
