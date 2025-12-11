@@ -1,4 +1,4 @@
-package sprint_06.hash_and_set.lesson_2;
+package sprint_06.hash_and_set.lesson_2.task1;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,8 +21,12 @@ public class Practicum {
 
     public static Map<String, Integer> assignSeats(List<String> passengerNames) {
         // Тут нужно написать код, который будет распределять места в самолёте ✈️
+        Map<String, Integer> seats = new HashMap<>();
 
+        for (int i = 0; i < passengerNames.size() ; i++) {
+seats.put(passengerNames.get(i), i+1);
+        }
 
-        return null;
+        return seats;
     }
 }
