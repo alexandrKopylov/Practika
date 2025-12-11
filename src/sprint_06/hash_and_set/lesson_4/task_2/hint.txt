@@ -1,0 +1,9 @@
+Замените HashMap на TreeMap.
+Класс Car должен реализовывать интерфейс Comparable.
+
+class Car implements Comparable<Car>
+Реализация метода compareTo должны быть такой:
+
+public int compareTo(Car o) {
+    return this.priceInRubles - o.priceInRubles;
+}
