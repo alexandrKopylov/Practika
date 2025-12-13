@@ -1,46 +1,78 @@
 package sprint_06.hash_and_set.lesson_5;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.TreeSet;
 
-class Practicum {
-    private static List<User> users = new ArrayList<>();
-
+public class Practicum {
     public static void main(String[] args) {
-        // создадим 1 миллион пользователей
-        for (long i = 1; i <= 1_000_000L; i++) {
-            users.add(new User(i, "Имя " + i));
+
+        TicetC t = new TicetC();
+        Set<Ticket> tickets = new TreeSet<>(t);
+        fillTickets(tickets);
+
+        System.out.println("Доступные билеты: ");
+        for (Ticket ticket : tickets) {
+            System.out.println("  * " + ticket);
         }
-
-        final long startTime = System.nanoTime();
-        User user = findUser(378_366L);
-        final long endTime = System.nanoTime();
-
-        System.out.println("Найден пользователь: " + user);
-        System.out.println("Поиск занял " + (endTime - startTime) + " наносекунд.");
     }
 
-    private static User findUser(Long userId) {
-        for (User user : users) {
-            if (user.id.equals(userId)) {
-                return user;
-            }
-        }
-
-        return null;
+    private static void fillTickets(Set<Ticket> tickets) {
+        tickets.add(new Ticket("Лондон", "Париж", 376));
+        tickets.add(new Ticket("Милан", "Москва", 298));
+        tickets.add(new Ticket("Берлин", "Бостон", 1273));
+        tickets.add(new Ticket("Пекин", "Рим", 846));
+        tickets.add(new Ticket("Санкт-Петербург", "Афины", 284));
+        tickets.add(new Ticket("Сидней", "Токио", 1738));
+        tickets.add(new Ticket("Мюнхен", "Дубай", 974));
     }
 
-    static class User {
-        Long id;
-        String name;
+    public static class Ticket {
+        public String from;
+        public String to;
+        public int priceInUsd;
 
-        public User(Long id, String name) {
-            this.id = id;
-            this.name = name;
+        public Ticket(String from, String to, int priceInUsd) {
+            this.from = from;
+            this.to = to;
+            this.priceInUsd = priceInUsd;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Ticket ticket = (Ticket) o;
+
+            if (priceInUsd != ticket.priceInUsd) return false;
+            if (!from.equals(ticket.from)) return false;
+            if (!to.equals(ticket.to)) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = from.hashCode();
+            result = 31 * result + to.hashCode();
+            result = 31 * result + priceInUsd;
+            return result;
+        }
+
+        @Override
         public String toString() {
-            return "User{id=" + id + ", name='" + name + "'}";
+            return "Ticket{from=" + from + ", to=" + to + ", priceInUsd=" + priceInUsd + '}';
         }
     }
+
+   public static class TicetC implements Comparator<Ticket>{
+
+       @Override
+       public int compare(Ticket o1, Ticket o2) {
+           return o1.priceInUsd- o2.priceInUsd;
+       }
+   }
+
 }
