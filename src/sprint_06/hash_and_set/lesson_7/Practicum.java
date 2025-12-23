@@ -30,7 +30,7 @@ public class Practicum {
         System.out.println("Все письма с сортировкой по дате получения: ");
 
         // реализуйте этот метод
-        ...
+
     }
 
     static class Letter {
