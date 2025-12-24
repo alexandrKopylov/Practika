@@ -15,11 +15,16 @@ public class PoemFixer {
     }
 
     public String fixPoem(String[] poem) {
-        for (int i = 0; i < poem.length; i++) {
 
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < poem.length; i++) {
+            if (!poem[i].isEmpty()  &&   !poem[i].isBlank()) {
+                sb.append(poem[i].trim()).append("\n");
+            }
         }
 
-        return null;
+        return sb.toString();
     }
 
     public static void main(String[] args) {
