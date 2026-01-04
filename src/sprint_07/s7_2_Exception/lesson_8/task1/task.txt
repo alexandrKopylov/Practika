@@ -1,0 +1,27 @@
+Доработайте код приложения для хранения и обработки паролей пользователей.
+
+По аналогии с классом ValidatePasswordException для ошибок при вводе пароля допишите код
+ класса ValidateNameException для ошибок при вводе имени пользователя.
+  Оба класса должны наследовать от ValidateException и принимать короткое сообщение об ошибке.
+
+В методах класса PasswordMemoryStorage пропущены предупреждения об исключении IOException — добавьте их.
+Допишите код класса NameValidator — он должен реализовывать интерфейс Validator и проверять,
+ не передана ли пустая строка. В обратном случае — генерировать исключение ValidateNameException
+  с сообщением «Имя не должно быть пустым».
+Добавьте реализованный экземпляр класса NameValidator в список nameValidators.
+Добавьте отлов исключений ValidateNameException и ValidatePasswordException в методы класса Practicum.
+ При этом выведите сообщения формата:
+Ошибка валидации имени: + короткое описание ошибки.
+Ошибка валидации пароля: + короткое описание ошибки.
+Организуйте закрытие хранилища storage при помощи метода close()
+ при любом развитии событий в методах addUser() и showUserPassword() класса Practicum.
+
+
+ Класс ValidateNameException должен наследовать от ValidateException и переопределять его конструктор.
+ В методах open(), store() и get() класса PasswordMemoryStorage нужно добавить указание на исключение IOException с помощью throws.
+ В классе NameValidator нужно переопределить метод validate(), предупредить об исключении типа ValidateException и сгенерировать исключение ValidateNameException.
+ Для генерации исключений используйте ключевое слово throw.
+ Проверьте, передана ли реализация класса NameValidator в список.
+ Для отлова исключений ValidateNameException и ValidatePasswordException в методах addUser() и showUserPassword() нужно использовать блоки catch.
+ Получить короткое сообщение об ошибке поможет метод getMessage().
+ Используйте блок finally для закрытия хранилища.

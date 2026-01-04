@@ -17,7 +17,13 @@ public class Practicum {
 
     public static Map<String, Object> addToMap(final Map<String, Object> storage,
                                                final String key, final Object value) {
-        storage.put(key, value);
+        try {
+            storage.put(key, value);
+        } catch (NullPointerException e) {
+            System.out.println("Реализация не поддерживает неинициализированные объекты.");
+        } catch (UnsupportedOperationException e) {
+            System.out.println("Реализация не поддерживает добавление новых объектов.");
+        }
         return storage;
     }
 }
