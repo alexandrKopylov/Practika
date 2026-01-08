@@ -1,0 +1,27 @@
+package sprint_07.s7_3_files.lesson_2.task1;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class Practicum {
+
+    private static final String HOME = System.getProperty("user.home");
+
+    public static void main(String[] args) {
+
+        // создаём объект Path с помощью статического метода get() класса Paths
+        Path testFilePath = Paths.get(HOME, "test", "file.txt");
+
+        // выводим информацию о файле
+        System.out.println("Информация о файле: ");
+        System.out.println(" - имя: " + testFilePath.getFileName());
+        System.out.println(" - корневая директория: " + testFilePath.getRoot());
+        System.out.println(" - родительская директория: " + testFilePath.getParent());
+
+        // выводим элементы пути
+        System.out.println("Элементы пути: ");
+        for (Path element : testFilePath) {
+            System.out.println(" - элемент пути: " + element);
+        }
+    }
+}
