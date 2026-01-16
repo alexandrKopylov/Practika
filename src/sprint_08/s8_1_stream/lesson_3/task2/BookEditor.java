@@ -12,8 +12,10 @@ public class BookEditor {
     public static void main(String[] args) {
         BookEditor bookEditor = new BookEditor();
 
-        bookEditor.setHeaderDecorator(new ToUpperCaseHeaderDecorator());
-        bookEditor.addLineProcessor(new CapitalizeFirstLetterProcessor());
+         bookEditor.setHeaderDecorator(header -> header.toUpperCase() + "\n");
+        bookEditor.addLineProcessor(line ->
+                line.substring(0, 1).toUpperCase() + line.substring(1)
+        );
 
         List<String> content = Arrays.asList(
                 "Приключения Java-программиста",
