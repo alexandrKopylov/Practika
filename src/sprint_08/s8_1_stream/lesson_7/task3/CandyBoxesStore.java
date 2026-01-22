@@ -37,9 +37,14 @@ class CandyBox {
     private static final List<String> prohibitedProducers = List.of("Триумф");
 
     //добавьте конструктор
+    public CandyBox(String boxTitle, List<Candy> candies) {
+        this.boxTitle = boxTitle;
+        this.candies = List.copyOf(candies);
+        this.numberOfCandies = candies.size();
+    }
 
     public static boolean isProducerAllowed(Candy candy) {
-        //добаьте тело метода
+        return !prohibitedProducers.contains(candy.producer);
     }
 
     public void printContent() {
@@ -60,7 +65,8 @@ public class CandyBoxesStore {
 
         List<Candy> candies = List.of(candy1, candy2, candy3, candy4);
 
-        List<Candy> candiesForBox = //добавьте код здесь
+        List<Candy> candiesForBox = candies.stream()     //добавьте код здесь
+                .
 
                 CandyBox candyBox = new CandyBox("С Новым Годом", candiesForBox);
 
