@@ -12,10 +12,15 @@ public class BookEditor {
     public static void main(String[] args) {
         BookEditor bookEditor = new BookEditor();
 
-         bookEditor.setHeaderDecorator(header -> header.toUpperCase() + "\n");
+       bookEditor.setHeaderDecorator(header -> header.toUpperCase() + "\n");
         bookEditor.addLineProcessor(line ->
                 line.substring(0, 1).toUpperCase() + line.substring(1)
         );
+        bookEditor.addLineProcessor(line -> line + "\n");
+
+
+       // bookEditor.setHeaderDecorator(new ToUpperCaseHeaderDecorator());
+       // bookEditor.addLineProcessor(new CapitalizeFirstLetterProcessor());
 
         List<String> content = Arrays.asList(
                 "Приключения Java-программиста",
@@ -35,9 +40,9 @@ public class BookEditor {
         String decoratedHeader = headerDecorator.decorate(sourceHeader);
         resultText.add(decoratedHeader);
 
-        for (int i=1; i<sourceText.size(); i++) {
+        for (int i = 1; i < sourceText.size(); i++) {
             String currentLine = sourceText.get(i);
-            for (LineProcessor processor: lineProcessors) {
+            for (LineProcessor processor : lineProcessors) {
                 currentLine = processor.processLine(currentLine);
             }
             resultText.add(currentLine);
@@ -55,7 +60,6 @@ public class BookEditor {
         this.lineProcessors.add(lineProcessor);
     }
 }
-
 
 
 interface HeaderDecorator {

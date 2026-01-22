@@ -3,6 +3,7 @@ package sprint_08.s8_1_stream.lesson_7.task3;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 class Candy {
     //название
@@ -27,6 +28,16 @@ class Candy {
     public static int compareByName(Candy c1, Candy c2) {
         return c1.name.compareTo(c2.name);
     }
+
+//    @Override
+//    public String toString() {
+//        return "Candy{" +
+//                "name='" + name + '\'' +
+//                ", producer='" + producer + '\'' +
+//                ", price=" + price +
+//
+//                '}';
+//    }
 }
 
 class CandyBox {
@@ -66,10 +77,13 @@ public class CandyBoxesStore {
         List<Candy> candies = List.of(candy1, candy2, candy3, candy4);
 
         List<Candy> candiesForBox = candies.stream()     //добавьте код здесь
-                .
+                .filter(CandyBox::isProducerAllowed)
+                .map(candy ->  new Candy(candy.name, candy.producer, candy.price-5, candy.amountSold, candy.alternateNames))
+                .sorted(Candy::compareByName)
+               // .peek(System.out::println)
+                .collect(Collectors.toList());
 
-                CandyBox candyBox = new CandyBox("С Новым Годом", candiesForBox);
-
+        CandyBox candyBox = new CandyBox("С Новым Годом", candiesForBox);
         candyBox.printContent();
     }
 }
