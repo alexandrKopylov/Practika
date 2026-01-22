@@ -43,7 +43,7 @@ public class Practicum {
         // добавьте построчное чтение из файла с помощью BufferedReader
         // в случае ошибки выведите сообщение: "Произошла ошибка во время чтения файла."
 
-
+        return null;
     }
 
     private static void writeListToFile(List<String> list, String filename) {
