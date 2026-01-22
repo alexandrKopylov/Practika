@@ -26,17 +26,23 @@ public class UniversityExample {
         students.add(new Student("Сергеев", "Дмитрий", "iamdmitry@gmail.com", 2021));
 
         List<Student> graduatedStudents = students.stream()
-                .filter(/* проверка, что студент успешно сдал экзамен */)
-                .map(/* заполнение названия группы студента */)
-                // операция peek выполняет над элементом действие и передаёт далее тот же элемент
-                .peek(/* добавление студента в клуб выпускников */)
+
+                .filter(student -> {
+                    String fullName = student.surname + " " + student.name;
+                    return examPassedNames.contains(fullName);
+                })
+                .map(student -> {
+                    student.groupName = groupNames.get(student.entranceYear);
+                    return student;
+                })
+                .peek(student -> graduatesClub.add(student.email))
                 .collect(Collectors.toList());
 
         for (Student student : graduatedStudents) {
             System.out.println(student);
         }
 
-        for (String email: graduatesClub) {
+        for (String email : graduatesClub) {
             System.out.println(email);
         }
 
