@@ -10,16 +10,16 @@ public class OptionalNameDemo {
         String username = "";
 
         if (username.isBlank()) {
-            //вставьте код здесь
+          return   Optional.empty();
         } else {
-            //вставьте код здесь
+         return    Optional.of (username );
         }
     }
 
     public static void main(String[] args) {
         Optional<String> maybeName = requestUserName();
-        if (/*вставьте код здесь*/) {
-            //вставьте код здесь
+        if (maybeName.isPresent()) {
+            String name = maybeName.get();
             System.out.println("Привет, " + name + "!");
         } else {
             System.out.println("Ваше право не называть имя!");
