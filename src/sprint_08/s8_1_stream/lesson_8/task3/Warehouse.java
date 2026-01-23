@@ -1,4 +1,6 @@
 package sprint_08.s8_1_stream.lesson_8.task3;
+
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -17,5 +19,12 @@ public class Warehouse {
     // или в обратном случае Optional, содержащий соответствующие конфеты
     public Optional<Candy> search(String name) {
         // Реализуйте данный метод с использованием Stream API
+        return candies.stream()
+                .sorted(Comparator.comparing(c -> c.name))
+                .filter(candy ->
+                        candy.name.equals(name) || candy.alternativeNames.contains(name))
+                .findFirst();
+
+
     }
 }

@@ -27,4 +27,14 @@ public class Candy {
         this.amount = amount;
         this.alternativeNames = new HashSet<>();
     }
+
+//    @Override
+//    public String toString() {
+//        return "Candy{" +
+//                "name='" + name + '\'' +
+//                ", price=" + price +
+//                ", amount=" + amount +
+//                ", alternativeNames=" + alternativeNames +
+//                '}';
+//    }
 }
