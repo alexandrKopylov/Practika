@@ -6,16 +6,18 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 
+
+
 class Practicum {
     public static void main(String[] args) {
         Instant now = Instant.now();
 
-        // укажите корректный формат вывода даты
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(...);
+        // Указываем корректный формат вывода даты
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy; HH:mm:ss. ZZZZZ");
 
-        // создайте экземпляр ZoneId для Москвы
-        ZoneId moscowZone = ...
-        ZonedDateTime moscowDateTime = ...
+        // Создаём экземпляр ZoneId для Москвы
+        ZoneId moscowZone = ZoneId.of("Europe/Moscow");
+        ZonedDateTime moscowDateTime = ZonedDateTime.ofInstant(now, moscowZone);
 
         printTime(formatter, moscowDateTime, "Москва");
 
@@ -26,15 +28,17 @@ class Practicum {
     }
 
     private static void convertAndPrintTime(DateTimeFormatter formatter, ZonedDateTime moscowDateTime, String cityName, String region) {
-        ZoneId newZone = ... // создайте ZoneId из region
-        ZonedDateTime newDateTime = ... // измените временную зону у moscowDateTime
+        // Создаём ZoneId из региона
+        ZoneId newZone = ZoneId.of(region);
+        // Изменяем временную зону у moscowDateTime
+        ZonedDateTime newDateTime = moscowDateTime.withZoneSameInstant(newZone);
 
         printTime(formatter, newDateTime, cityName);
     }
 
     private static void printTime(DateTimeFormatter formatter, ZonedDateTime dateTime, String cityName) {
         System.out.println(cityName + ":");
-        // выведите dateTime в указанном в formatter формате
-        System.out.println(...);
+        // Выводим dateTime в указанном формате
+        System.out.println(formatter.format(dateTime));
     }
 }
