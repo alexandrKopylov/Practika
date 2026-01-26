@@ -19,35 +19,30 @@ class Watch {
     }
 
     public void changeTimeZone() {
-        numOfZone = ...;
+        //Также корректный вариант — numOfZone = (numOfZone + 1) % 3
+        numOfZone = (numOfZone + 1) % zones.size();
         ZoneId newZone = ZoneId.of(zones.get(numOfZone));
-        // смените временную зону (время должно остаться прежним)
-        ...
+        currentTime = currentTime.withZoneSameLocal(newZone);
     }
 
     public void addTenHours() {
-        // увеличьте текущее время на 10 часов
-        ...
+        currentTime = currentTime.plusHours(10);
     }
 
     public void addHour() {
-        // увеличьте текущее время на 1 час
-        ...
+        currentTime = currentTime.plusHours(1);
     }
 
     public void addTenMinutes() {
-        // увеличьте текущее время на 10 минут
-        ...
+        currentTime = currentTime.plusMinutes(10);
     }
 
     public void addMinute() {
-        // увеличьте текущее время на 1 минуту
-        ...
+        currentTime = currentTime.plusMinutes(1);
     }
 
     public ZonedDateTime getCurrentTime() {
-        // верните текущее время
-        ...
+        return currentTime;
     }
 }
 
@@ -55,7 +50,27 @@ class Practicum {
     public static void main(String[] args) {
         Watch watch = new Watch();
 
-        // настройка часов
+        watch.changeTimeZone();
+        watch.changeTimeZone();
+
+        watch.addTenHours();
+        watch.addHour();
+        watch.addHour();
+        watch.addHour();
+        watch.addHour();
+        watch.addHour();
+        watch.addHour();
+        watch.addHour();
+        watch.addHour();
+
+        watch.addTenMinutes();
+        watch.addTenMinutes();
+        watch.addMinute();
+        watch.addMinute();
+        watch.addMinute();
+        watch.addMinute();
+        watch.addMinute();
+        watch.addMinute();
 
         System.out.println(watch.getCurrentTime());
     }
