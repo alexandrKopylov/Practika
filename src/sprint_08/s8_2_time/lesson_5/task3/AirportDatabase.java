@@ -39,6 +39,22 @@ class AirportDatabase {
          */
 
 
+        Airport result = switch (airportCode) {
+            case "VKO" -> AirportDatabase.vnukovo;
+            case "LED" -> AirportDatabase.pulkovo;
+            case "SVX" -> AirportDatabase.koltsovo;
+            case "VVO" -> AirportDatabase.vladivostok;
 
+            default -> {
+                throw new IllegalStateException("Неизвестный код аэропорта: "  + airportCode);
+            }
+        };
+
+        return result;
+    }
+
+    static void main(String[] args) {
+       Airport a =  AirportDatabase.getAirportByCode("VKO");
+        System.out.println(a);
     }
 }
