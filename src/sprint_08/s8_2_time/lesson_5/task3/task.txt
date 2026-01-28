@@ -1,0 +1,35 @@
+Сервис по продаже авиабилетов LeTumbler просит вас помочь дописать метод по выводу информации о рейсе.
+Входные параметры:
+Время и дата вылета в виде строки 12:30 25.12.21
+Код аэропорта вылета
+Код аэропорта прибытия
+Количество минут, на которое задерживается рейс
+Продолжительность полёта:
+Отдельно часы
+Отдельно минуты
+По указанным параметрам необходимо вычислить актуальное время вылета рейса и время его прибытия с учётом задержки.
+ Вычисленные значения необходимо передать в метод printTickets(...).
+Также необходимо с помощью оператора switch-case дополнить метод getAirportByCode(String airportCode).
+ Для неверного кода аэропорта выбросить исключение IllegalStateException
+  с текстом «Неизвестный код аэропорта: [переданный код]».
+  Данное исключение необходимо обработать в коде: выполнение программы не должно на нём прерываться.
+
+
+  ////
+  Необходимый формат времени и даты можно получить с помощью метода DateTimeFormatter.ofPattern("HH:mm dd.MM.yy").
+  Необходимый формат времени можно получить с помощью DateTimeFormatter.ofPattern("HH:mm").
+  Чтобы обработать исключение, необходимо получение данных обернуть в try catch:
+
+    try {
+       // исполняемый код
+    } catch (IllegalStateException e) {
+       System.out.println(e.getMessage());
+       return;
+    }
+
+  Собрать экземпляр ZonedDateTime можно из LocalDateTime и ZoneId с помощью метода ZonedDateTime.of(...).
+  Получить LocalDateTime из входной строки можно с помощью метода LocalDateTime.parse(formattedDepartureTime, DATE_TIME_FORMATTER).
+  Получить ZoneId можно с помощью метода ZoneId.of(departureAirport.getZone()).
+  Создать экземпляр класса Duration можно из переменных flightDurationHours и flightDurationMinutes: Duration.ofHours(flightDurationHours).plusMinutes(flightDurationMinutes).
+  Найти время прибытия в нужной временной зоне можно с помощью методов departure.plus(flightDuration).withZoneSameInstant(arrivalZoneId).
+  Вывести продолжительность полёта в формате часы:минуты можно с помощью flightDuration.toHours() + ":" + flightDuration.toMinutesPart().
