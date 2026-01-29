@@ -38,23 +38,23 @@ class AirportDatabase {
          * Для неверного кода пробросьте исключение.
          */
 
-
-        Airport result = switch (airportCode) {
-            case "VKO" -> AirportDatabase.vnukovo;
-            case "LED" -> AirportDatabase.pulkovo;
-            case "SVX" -> AirportDatabase.koltsovo;
-            case "VVO" -> AirportDatabase.vladivostok;
-
-            default -> {
-                throw new IllegalStateException("Неизвестный код аэропорта: "  + airportCode);
-            }
-        };
-
+        Airport result;
+        switch (airportCode) {
+            case "VKO":
+                result = AirportDatabase.vnukovo;
+                break;
+            case "LED":
+                result = AirportDatabase.pulkovo;
+                break;
+            case "SVX":
+                result = AirportDatabase.koltsovo;
+                break;
+            case "VVO":
+                result = AirportDatabase.vladivostok;
+                break;
+            default:
+                throw new IllegalStateException("Неизвестный код аэропорта: " + airportCode);
+        }
         return result;
-    }
-
-    static void main(String[] args) {
-       Airport a =  AirportDatabase.getAirportByCode("VKO");
-        System.out.println(a);
     }
 }

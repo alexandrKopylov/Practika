@@ -33,3 +33,9 @@
   Создать экземпляр класса Duration можно из переменных flightDurationHours и flightDurationMinutes: Duration.ofHours(flightDurationHours).plusMinutes(flightDurationMinutes).
   Найти время прибытия в нужной временной зоне можно с помощью методов departure.plus(flightDuration).withZoneSameInstant(arrivalZoneId).
   Вывести продолжительность полёта в формате часы:минуты можно с помощью flightDuration.toHours() + ":" + flightDuration.toMinutesPart().
+
+
+  DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm dd.MM.yyyy");
+
+  "12:15 02.11.21"
+   LocalDateTime dateTimeDeparture =
