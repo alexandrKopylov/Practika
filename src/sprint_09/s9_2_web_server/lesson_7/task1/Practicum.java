@@ -4,18 +4,24 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 class PostsHandler implements HttpHandler {
     private static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
+
     @Override
     public void handle(HttpExchange exchange) throws IOException {
 
         // получите информацию об эндпоинте, к которому был запрос
-        Endpoint endpoint = ...
+        String requestPath = exchange.getRequestURI().getPath();
+        String requestMethod = exchange.getRequestMethod();
+
+        Endpoint endpoint = getEndpoint(requestPath, requestMethod);
 
         switch (endpoint) {
             case GET_POSTS: {
@@ -37,7 +43,16 @@ class PostsHandler implements HttpHandler {
 
     private Endpoint getEndpoint(String requestPath, String requestMethod) {
         // реализуйте этот метод, проанализировав путь и метод запроса
-        // ...
+        //
+        if (requestMethod.equals("POST")) {
+            return Endpoint.POST_COMMENT;
+        } else if (  requestMethod.equals("GET")  &&  requestPath.endsWith("comments")) {
+            return Endpoint.GET_COMMENTS;
+        }else if (  requestMethod.equals("GET")  &&  !requestPath.endsWith("comments")) {
+            return Endpoint.GET_POSTS;
+        } else {
+            return Endpoint.UNKNOWN;
+        }
     }
 
     private void writeResponse(HttpExchange exchange,
@@ -49,7 +64,16 @@ class PostsHandler implements HttpHandler {
              Учтите, что если responseString — пустая строка, то её не нужно передавать в ответе.
              В этом случае ответ отправляется без тела.
              */
-        // ...
+       if (Objects.isNull(responseString)  || responseString.equals("") ){
+           exchange.sendResponseHeaders( responseCode, 0);
+
+       }else{
+           exchange.sendResponseHeaders( responseCode, 0);
+           try (OutputStream os = exchange.getResponseBody()) {
+               os.write(responseString.getBytes());
+           }
+       }
+
     }
 
     enum Endpoint {GET_POSTS, GET_COMMENTS, POST_COMMENT, UNKNOWN}
@@ -62,9 +86,11 @@ public class Practicum {
 
         // добавьте код для конфигурирования и запуска сервера
         // ...
-
+        HttpServer httpServer = HttpServer.create(new InetSocketAddress(PORT), 0);
+        httpServer.createContext("/posts", new PostsHandler());
+        httpServer.start();
         System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
         // завершаем работу сервера для корректной работы тренажёра
-        httpServer.stop(1);
+      //  httpServer.stop(1);
     }
 }
