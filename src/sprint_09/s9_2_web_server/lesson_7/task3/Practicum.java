@@ -1,4 +1,4 @@
-package sprint_09.s9_2_web_server.lesson_7.task2;
+package sprint_09.s9_2_web_server.lesson_7.task3;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -44,84 +44,92 @@ class PostsHandler implements HttpHandler {
         }
     }
 
-    private void handleGetPosts(HttpExchange exchange) throws IOException {
-        // верните ответ, представляющий список постов. Код ответа должен быть 200.
-        // информация по каждому посту должна начинаться с новой строки.
-        // для преобразования объекта поста в строку воспользуйтесь его методом toString
-        exchange.sendResponseHeaders(200, 0);
+    private void handlePostComments(HttpExchange exchange) throws IOException {
+        // реализуйте обработку запроса на добавление комментария
 
-        String result =  posts.stream()
+        // извлеките идентификатор поста и обработайте исключительные ситуации
+        Optional<Integer> postIdOpt = getPostId(exchange);
+        if (postIdOpt.isEmpty()) {
+            writeResponse(exchange, "Некорректный идентификатор поста", 400);
+            return;
+        }
+        int postId = postIdOpt.get();
+        if (posts.stream().noneMatch(x -> x.getId() == postId)) {
+            writeResponse(exchange, "Пост с идентификатором " + postId + " не найден", 404);
+        }
+
+        // получите комментарий из тела запроса
+        // не забудьте обработать исключительные ситуации
+        Optional<Comment> commentOptional = parseComment(exchange.getRequestBody());
+        if (commentOptional.isPresent()) {
+            Comment comment = commentOptional.get();
+
+            Post post = posts.stream()
+                    .filter(x -> x.getId() == postId)
+                    .findFirst()
+                    .get();
+
+            post.addComment(comment);
+            writeResponse(exchange, "Комментарий добавлен", 201);
+        } else {
+            writeResponse(exchange, "Поля комментария не могут быть пустыми", 400);
+        }
+        // добавьте комментарий к указанном посту
+        // не забудьте обработать ситуацию, когда пост не найден
+    }
+
+    private Optional<Comment> parseComment(InputStream bodyInputStream) throws IOException {
+        // реализуйте код, разбирающий тело запроса и конструирующий объект комментария
+
+        String body = new String(bodyInputStream.readAllBytes(), StandardCharsets.UTF_8);
+
+        /* Проанализируйте тело запроса и получите из него имя пользователя и текст комментария.
+           Вам могут помочь методы indexOf и substring класса String. */
+
+        int newLineInd = body.indexOf("\n");
+        if (body.equals("") || newLineInd == -1) {
+            return Optional.empty();
+        }
+        String user = body.substring(0, newLineInd);
+        String coment = body.substring(newLineInd + 1);
+        return Optional.of(new Comment(user, coment));
+    }
+
+    private void handleGetPosts(HttpExchange exchange) throws IOException {
+        String response = posts.stream()
                 .map(Post::toString)
                 .collect(Collectors.joining("\n"));
-
-        try (OutputStream os = exchange.getResponseBody()) {
-            os.write(result.getBytes());
-        }
+        writeResponse(exchange, response, 200);
     }
 
     private void handleGetComments(HttpExchange exchange) throws IOException {
         Optional<Integer> postIdOpt = getPostId(exchange);
-
-        /* Верните комментарии указанного поста. Информация о каждом комментарии
-           должна начинаться с новой строки. Код статуса — 200.
-           Если запрос был составлен неверно, верните сообщение об ошибке с кодом 400.
-           Если пост с указанным идентификатором не найден, верните сообщение об этом с кодом 404. */
-        Integer indexPost = null;
-        if (postIdOpt.isPresent()) {
-            indexPost = postIdOpt.get();
-        } else {
-            exchange.sendResponseHeaders(400, 0);
-            try (OutputStream os = exchange.getResponseBody()) {
-                os.write("Некорректный идентификатор поста".getBytes());
-            }
+        if (postIdOpt.isEmpty()) {
+            writeResponse(exchange, "Некорректный идентификатор поста", 400);
             return;
         }
+        int postId = postIdOpt.get();
 
-        Integer finalIndexPost = indexPost;
-        if (posts.stream().anyMatch(x -> x.getId() == finalIndexPost)) {
-            exchange.sendResponseHeaders(200, 0);
-
-
-            String result = posts.stream()
-                    .filter(x -> x.getId() == finalIndexPost)
-                    .findFirst()
-                    .map(Post::getComments)
-                    .map(comments -> comments.stream()
-                            .map(Comment::toString)
-                            .collect(Collectors.joining("\n")))
-                    .orElse("Post not found");
-
-            try (OutputStream os = exchange.getResponseBody()) {
-                os.write(result.getBytes());
-            }
-
-        } else {
-            String result = String.format("Пост с идентификатором %s не найден", finalIndexPost);
-            exchange.sendResponseHeaders(404, 0);
-            try (OutputStream os = exchange.getResponseBody()) {
-                os.write(result.getBytes());
+        for (Post post : posts) {
+            if (post.getId() == postId) {
+                String response = post.getComments().stream()
+                        .map(Comment::toString)
+                        .collect(Collectors.joining("\n"));
+                writeResponse(exchange, response, 200);
+                return;
             }
         }
 
-
+        writeResponse(exchange, "Пост с идентификатором " + postId + " не найден", 404);
     }
 
     private Optional<Integer> getPostId(HttpExchange exchange) {
-        /* Реализуйте метод получения идентификатора поста.
-           Если идентификатор не является числом, верните Optional.empty(). */
-        String requestPath = exchange.getRequestURI().getPath();
-        // GET /posts/1/comments
-        Optional<Integer> opt;
+        String[] pathParts = exchange.getRequestURI().getPath().split("/");
         try {
-            opt = Optional.of(Integer.parseInt(requestPath.split("/")[2]));
-        } catch (NumberFormatException e) {
-            opt = Optional.empty();
+            return Optional.of(Integer.parseInt(pathParts[2]));
+        } catch (NumberFormatException exception) {
+            return Optional.empty();
         }
-        return opt;
-    }
-
-    private void handlePostComments(HttpExchange exchange) throws IOException {
-        writeResponse(exchange, "Этот эндпоинт пока не реализован", 200);
     }
 
     private Endpoint getEndpoint(String requestPath, String requestMethod) {
@@ -177,7 +185,7 @@ public class Practicum {
 
         System.out.println("HTTP-сервер запущен на " + PORT + " порту!");
         // завершаем работу сервера для корректной работы тренажёра
-       httpServer.stop(1);
+        httpServer.stop(1);
     }
 }
 
